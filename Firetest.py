@@ -29,4 +29,4 @@ Firetest = Firetest()
 
 database = firebase.FirebaseApplication(Firetest.geturl(), None)
 Firetest.writeData(Firetest.getInput())
-Firetest.readData()
+print(Firetest.readData())
