@@ -1,25 +1,33 @@
 from firebase import firebase
-import requests
+import json
 
 class Firetest:
 
-    def getWeatherData(self, location):
-        self.location = location
-        request_URL = "http://api.openweathermap.org/data/2.5/weather?appid=a82ce5d667628af3985ec52d8a1a91eb&q={}".format(location)
-        return_content = requests.get(request_URL).json()
-        temperature = float(return_content['main']['temp']) - 273
-        return temperature
-    
+    def geturl(self):
+        f = open("url.txt", "r")
+        url = f.read().replace("db_url: ","")
+        return url
 
-database = firebase.FirebaseApplication('https://python-realtime-database.firebaseio.com/', None)
+    def getInput(self):
+        while True:
+            data = str("Message: ")
+            return data
+
+
+    def writeData(self, message):
+        self.message = message
+        with open("data.json") as file:
+            data_list = json.load(file)['Messages'][0]
+            datapoints = data_list['contents']
+            datapoints.append(message)
+        database.post('/WeatherData/', datapoints)
+
+    def readData(self):
+        data = database.get(Firetest.readData())
+        return data
+
+
 Firetest = Firetest()
 
-while True:
-
-    temperature = Firetest.getWeatherData()
-
-    data_to_upload = {
-        'Temp' : temperature
-    }
-
-    result = database.post("/WeatherData/", data_to_upload)
+database = firebase.FirebaseApplication(Firetest.geturl(), None)
+Firetest.writeData(Firetest.getInput())
