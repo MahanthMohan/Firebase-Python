@@ -9,21 +9,19 @@ class Firetest:
         return url
 
     def getInput(self):
-        while True:
-            data = str("Message: ")
-            return data
-
+        data = str("Message: ")
+        return data
 
     def writeData(self, message):
         self.message = message
         with open("data.json") as file:
-            data_list = json.load(file)['Messages'][0]
-            datapoints = data_list['contents']
-            datapoints.append(message)
-        database.post('/WeatherData/', datapoints)
+            msg_list = json.load(file)['Messages'][0]
+            contents = msg_list['contents']
+            contents.append(message)
+        database.post('/MyMessages/', contents)
 
     def readData(self):
-        data = database.get(Firetest.readData())
+        data = database.get('/MyMessages', None)
         return data
 
 
@@ -31,3 +29,4 @@ Firetest = Firetest()
 
 database = firebase.FirebaseApplication(Firetest.geturl(), None)
 Firetest.writeData(Firetest.getInput())
+Firetest.readData()
