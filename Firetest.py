@@ -21,7 +21,7 @@ class Firetest:
         database.post('/MyMessages/', contents)
 
     def readData(self):
-        data = database.get('/MyMessages', None)
+        data = database.get('/MyMessages/', None)
         return data
 
 

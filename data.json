@@ -1,6 +1,9 @@
 {"Messages": [
     {"tag": "msg",
      "contents": []
+    },
+    {"tag": "weather",
+     "temp":[]
     }
 ]
 }
