@@ -9,7 +9,7 @@ class Firetest:
         return url
 
     def getInput(self):
-        data = str("Message: ")
+        data = input("Message: ")
         return data
 
     def writeData(self, message):
